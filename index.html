@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Touch Grass</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-green-50 flex flex-col items-center justify-center min-h-screen p-4">
+  <h1 class="text-4xl font-bold mb-6">Touch Grass 🌱</h1>
+  <div id="activity" class="text-2xl mb-4 text-center"></div>
+  <button
+    id="newActivityBtn"
+    class="px-6 py-3 bg-green-400 hover:bg-green-500 rounded text-white font-semibold transition"
+  >
+    Get Activity
+  </button>
+
+  <script>
+    async function fetchActivity() {
+      const res = await fetch('/api/touch-grass');
+      const data = await res.json();
+      document.getElementById('activity').textContent = `${data.emoji} ${data.activity}`;
+    }
+
+    document.getElementById('newActivityBtn').addEventListener('click', fetchActivity);
+
+    // Fetch one on page load
+    fetchActivity();
+  </script>
+</body>
+</html>
